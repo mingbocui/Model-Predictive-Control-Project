@@ -1,4 +1,4 @@
-function draw = draw(deliverable, tag, ref)
+function draw = draw(deliverable, tag)
     draw=0;
     Ts = 1/5; 
     quad = Quad(Ts); 
@@ -8,42 +8,47 @@ function draw = draw(deliverable, tag, ref)
     if tag == 'x'
         mpc = MPC_Control_x(sys_x, Ts);
         x0 = [0;0;0;2];
-        xs = sys_x.A(:,end);
-        us = sys_x.D;
+%         xs = sys_x.A(:,end);
+%         us = sys_x.D;
         ref = -2;
+        target = 4;
     elseif tag == 'y'
         mpc = MPC_Control_y(sys_y, Ts);
         x0 = [0;0;0;2];
-        xs = sys_y.A(:,end);
-        us = sys_y.D;
+%         xs = sys_y.A(:,end);
+%         us = sys_y.D;
         ref = -2;
+        target = 4;
     elseif tag == 'z'
         mpc = MPC_Control_z(sys_z, Ts);
         x0 = [0;2];
-        xs = sys_z.A(:,end);
-        us = sys_z.D;
-        d_est = 0;
+%         xs = sys_z.A(:,end);
+%         us = sys_z.D;
+%         d_est = 0;
         ref = -2;
+        target = 2;
     elseif tag == "yaw"
         mpc = MPC_Control_yaw(sys_yaw, Ts);
-        x0 = [0; pi/4];
-        xs = sys_yaw.A(:,end);
-        us = sys_yaw.D;
-        ref = pi/4
+        x0 = [0; 0];
+%         xs = sys_yaw.A(:,end);
+%         us = sys_yaw.D;
+        ref = pi/4;
+        target=2;
         
     end
     
     sol.x(:,1) = x0;
 
     i = 1;
-    while norm(ref - sol.x(:,end)) > 1e-3 % Simulate until convergence
-      if tag == 'z'
-          %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us,d_est};
-          uopt = mpc.get_u(sol.x(:,end),ref)
-      else
-          %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us};
-          uopt = mpc.get_u(sol.x(:,end),ref)
-      end
+    while norm(ref - sol.x(target,end)) > 1e-5 % Simulate until convergence
+%       if tag == 'z'
+%           %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us,d_est};
+%           uopt = mpc.get_u(sol.x(:,end),ref)
+%       else
+%           %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us};
+%           uopt = mpc.get_u(sol.x(:,end),ref)
+%       end
+      uopt = mpc.get_u(sol.x(:,end),ref);
       %if infeasible == 1, error('Error in optimizer - could not solve the problem'); end
       % Extract the optimal input
       sol.u(:,i) = uopt;
