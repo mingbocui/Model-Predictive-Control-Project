@@ -21,7 +21,7 @@ classdef MPC_Control_yaw < MPC_Control
       
       % SET THE HORIZON HERE
       % N = ...
-      N=10;
+      N=20;
       
       % Predicted state and input trajectories
       x = sdpvar(n, N);

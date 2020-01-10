@@ -1,4 +1,4 @@
-function draw = draw(deliverable, tag)
+function draw = draw(deliverable, tag, ref)
     draw=0;
     Ts = 1/5; 
     quad = Quad(Ts); 
@@ -9,41 +9,41 @@ function draw = draw(deliverable, tag)
         mpc = MPC_Control_x(sys_x, Ts);
         x0 = [0;0;0;2];
         xs = sys_x.A(:,end);
-        %us = mpc.get_u(xs)
         us = sys_x.D;
+        ref = -2;
     elseif tag == 'y'
         mpc = MPC_Control_y(sys_y, Ts);
         x0 = [0;0;0;2];
         xs = sys_y.A(:,end);
-        %us = mpc.get_u(xs)
         us = sys_y.D;
+        ref = -2;
     elseif tag == 'z'
         mpc = MPC_Control_z(sys_z, Ts);
         x0 = [0;2];
         xs = sys_z.A(:,end);
-        %us = mpc.get_u(xs)
         us = sys_z.D;
         d_est = 0;
+        ref = -2;
     elseif tag == "yaw"
         mpc = MPC_Control_yaw(sys_yaw, Ts);
         x0 = [0; pi/4];
         xs = sys_yaw.A(:,end);
-        %us = sys_yaw.D;
+        us = sys_yaw.D;
+        ref = pi/4
         
     end
     
     sol.x(:,1) = x0;
 
     i = 1;
-    while norm(sol.x(:,end)) > 1e-3 % Simulate until convergence
-%       if tag == 'z'
-%           uopt = mpc.get_u(sol.x(:,end))
-%           %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us,d_est};
-%       else
-%           uopt = mpc.get_u(sol.x(:,end))
-%           %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us};
-%       end
-      uopt = mpc.get_u(sol.x(:,end));
+    while norm(ref - sol.x(:,end)) > 1e-3 % Simulate until convergence
+      if tag == 'z'
+          %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us,d_est};
+          uopt = mpc.get_u(sol.x(:,end),ref)
+      else
+          %[uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us};
+          uopt = mpc.get_u(sol.x(:,end),ref)
+      end
       %if infeasible == 1, error('Error in optimizer - could not solve the problem'); end
       % Extract the optimal input
       sol.u(:,i) = uopt;

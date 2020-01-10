@@ -21,7 +21,7 @@ classdef MPC_Control_x < MPC_Control
       
       % SET THE HORIZON HERE
       %N = ...²»È·¶¨
-      N=10;
+      N=20;
       
       
       % Predicted state and input trajectories
