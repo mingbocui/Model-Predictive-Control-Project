@@ -1,0 +1,41 @@
+function draw = draw(mpc,xs,us)
+    draw=0;
+
+%     x0 = [0;0;0;0;0;0;0;0;0;2;0;0];
+    x0 = [0;0;0;2];
+    sol.x(:,1) = x0;
+
+    i = 1;
+%       try
+      while norm(sol.x(4,end)) > 1e-3 % Simulate until convergence
+          
+          [uopt,infeasible] = mpc.ctrl_opt{sol.x(:,i),xs,us};
+          if infeasible == 1, error('Error in optimizer - could not solve the problem'); end
+          % Extract the optimal input
+          sol.u(:,i) = uopt;
+          % Apply the optimal input to the system
+          sol.x(:,i+1) = mpc.A*sol.x(:,i) + mpc.B*sol.u(:,i);
+          i = i + 1;
+      end
+%       catch
+%         error('---> Initial state is outside the feasible set <---\n');
+%       end
+      i
+      figure
+      hold on; grid on;
+
+      o = ones(1,size(sol.x,2));
+
+      %subplot(3,1,1)
+      title(Syst
+      hold on; grid on;
+      plot(sol.x(1,:),'-k','markersize',20,'linewidth',2);
+      plot(sol.x(2,:),'-k','markersize',20,'linewidth',2);
+      plot(sol.x(3,:),'-k','markersize',20,'linewidth',2);
+      plot(sol.x(4,:),'-k','markersize',20,'linewidth',2);
+%       plot(1:size(sol.x,2),f(1)*o,'r','linewidth',2)
+%       plot(1:size(sol.x,2),-f(3)*o,'r','linewidth',2)
+      ylabel('Position')
+
+
+end

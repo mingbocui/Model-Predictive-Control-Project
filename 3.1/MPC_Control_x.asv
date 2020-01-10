@@ -15,14 +15,12 @@ classdef MPC_Control_x < MPC_Control
       
       [n,m] = size(mpc.B);
       
-      
       % Steady-state targets (Ignore this before Todo 3.2)
       xs = sdpvar(n, 1);
       us = sdpvar(m, 1);
       
       % SET THE HORIZON HERE
-      N=20;
-
+      N=100;
       
       % Predicted state and input trajectories
       x = sdpvar(n, N);

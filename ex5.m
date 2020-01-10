@@ -114,6 +114,7 @@ for i = 1:nsteps-1
 
      
 end
+%%
 
 plot(u_hist); hold on
 plot(umax*ones(size(u_hist)),'--');
