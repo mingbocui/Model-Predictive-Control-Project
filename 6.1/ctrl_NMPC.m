@@ -23,11 +23,6 @@ h=0.22;
 f=@(a,b) quad.f(a,b);
 f_discrete = @(x,u) RK4(x,u,h,f);
 
-%Xs(6)=REF(4);
-%Xs(10)=REF(1);
-%Xs(11)=REF(2);
-%Xs(12)=REF(3);
-
 cost=0;
 for i=1:4
     cost=cost+(U(i,:)-Us(i))*(U(i,:)-Us(i))';
