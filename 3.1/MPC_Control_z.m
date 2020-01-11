@@ -73,22 +73,10 @@ classdef MPC_Control_z < MPC_Control
           end
       end
       [Ff,ff] = double(Xf);
-      figure;Xf.projection(1:2).plot();title("Terminal invariant set of z");hold on;saveas(gcf,"3_1_terminal_z/terminal_z.jpg");
-      %sys_new = LTISystem('A',mpc.A,'B',mpc.B);
-      %sys_new.x.penalty = QuadFunction(Q);
-      %sys_new.u.penalty = QuadFunction(R);
-      %Qf = sys_new.LQRPenalty.weight;
-      %Sf = sys_new.LQRSet;
-      %Ff = Sf.A;
-      %ff = Sf.b;
-      
-      %Sf.projection(1:2).plot();
-      % Xf.projection(1:2).plot();
+%       figure;Xf.projection(1:2).plot();title("Terminal invariant set of z");hold on;saveas(gcf,"3_1_terminal_z/terminal_z.jpg");
       
       con = [];
       obj = 0;
-      %con = (x(:,2) == sys_x.A*x(:,1) + sys_x.B*u(:,1)) + (M*u(:,1) <= m);
-      %obj = u(:,1)'*R*u(:,1);
       for i = 1:N-1
           con = [con, x(:,i+1) == mpc.A*x(:,i) + mpc.B*u(:,i)]; 
           % con = [con, x(:,i+1) == mpc.A*x(:,i) + mpc.B*u(:,i)+mpc.B*d_est]; 
@@ -99,9 +87,6 @@ classdef MPC_Control_z < MPC_Control
       con = con + (Ff*x(:,N) <= ff);
       obj = obj + x(:,N)'*Qf*x(:,N);
       % obj = obj + (x(:,N)-xs)'*Qf*(x(:,N)-xs);
-      
-
-
       
       
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 

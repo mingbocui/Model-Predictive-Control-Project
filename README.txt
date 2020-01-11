@@ -1,6 +1,6 @@
-初始化：
+Initialization
 tbxmanager restorepath
-addpath '指向casadi-windows-matlabR2016a-v3.5.1的地址'
+addpath 'path_to_casadi-windows-matlabR2016a-v3.5.1'
 import casadi.*
 cd c:\gurobi900\win64\matlab 
 gurobi_setup 
@@ -15,12 +15,10 @@ sim = ode45(@(t, x) quad.f(x, u), [0, Tf], x0);
 quad.plot(sim, u);
 
 
-
 2.
 [xs,us] = quad.trim();
 sys = quad.linearize(xs, us);
 [sys_x, sys_y, sys_z, sys_yaw] = quad.decompose(sys, xs, us);
-
 
 
 3.1
@@ -32,9 +30,6 @@ sys = quad.linearize(xs, us);
 mpc_x = MPC_Control_x(sys_x, Ts);
 ux = mpc_x.get_u([0;0;-0.1;0.1])
 
-
-
-
 3.2
 Ts = 1/5; 
 quad = Quad(Ts); 
@@ -43,9 +38,6 @@ sys = quad.linearize(xs, us);
  [sys_x, sys_y, sys_z, sys_yaw] = quad.decompose(sys, xs, us);
 mpc_x = MPC_Control_x(sys_x, Ts);
 ux = mpc_x.get_u([0;0;-0.1;0.1], -2)
-
-
-
 
 4.
 Ts = 1/5; 
@@ -77,11 +69,11 @@ sim = quad.sim(mpc_x, mpc_y, mpc_z, mpc_yaw,BIAS);
 quad.plot(sim);
 
 
-
-
-
 6.
 quad = Quad(); 
 CTRL = ctrl_NMPC(quad);
 sim = quad.sim(CTRL)
 quad.plot(sim)
+
+PLOT
+

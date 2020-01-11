@@ -61,17 +61,6 @@ classdef MPC_Control_y < MPC_Control
       end
       [Ff,ff] = double(Xf);
       
-      %sys_new = LTISystem('A',mpc.A,'B',mpc.B);
-      %sys_new.x.penalty = QuadFunction(Q);
-      %sys_new.u.penalty = QuadFunction(R);
-      %Qf = sys_new.LQRPenalty.weight;
-      %Sf = sys_new.LQRSet;
-      %Ff = Sf.A;
-      %ff = Sf.b;
-      
-      %Sf.projection(1:2).plot();
-      % Xf.projection(1:2).plot();
-      
       con = [];
       obj = 0;
       %con = (x(:,2) == sys_x.A*x(:,1) + sys_x.B*u(:,1)) + (M*u(:,1) <= m);
@@ -86,11 +75,8 @@ classdef MPC_Control_y < MPC_Control
       %obj = obj + x(:,N)'*Qf*x(:,N);
       obj = obj + (x(:,N)-xs)'*Qf*(x(:,N)-xs);
       
-  
-      
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      
       
       ctrl_opt = optimizer(con, obj, sdpsettings('solver','gurobi'), ...
         {x(:,1), xs, us}, u(:,1));
@@ -126,8 +112,6 @@ classdef MPC_Control_y < MPC_Control
                 ref == mpc.C*xs + mpc.D*us   ];
       obj   = us'*us;
      
-      
-      
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       

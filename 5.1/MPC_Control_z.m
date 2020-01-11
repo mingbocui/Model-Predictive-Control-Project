@@ -74,20 +74,6 @@ classdef MPC_Control_z < MPC_Control
       end
       [Ff,ff] = double(Xf);
       
-      %sys_new = LTISystem('A',mpc.A,'B',mpc.B);
-      %sys_new.x.penalty = QuadFunction(Q);
-      %sys_new.u.penalty = QuadFunction(R);
-      %Qf = sys_new.LQRPenalty.weight;
-      %Sf = sys_new.LQRSet;
-      %Ff = Sf.A;
-      %ff = Sf.b;
-      
-      %Sf.projection(1:2).plot();
-      % Xf.projection(1:2).plot();
-      
-
-      %Fu=[1;-1];
-      %fu=[0.3;0.2];
       con=[];
       obj=0;
       for i = 1:N-1
@@ -97,10 +83,6 @@ classdef MPC_Control_z < MPC_Control
       end
       %con = con + (Ff*x(:,N) <= ff);
       obj = obj + (x(:,N)-xs)'*Qf*(x(:,N)-xs);
-      
-
-
-      
       
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,12 +121,6 @@ classdef MPC_Control_z < MPC_Control
       % You can use the matrices mpc.A, mpc.B, mpc.C and mpc.D
       u_M=[1,-1];
       u_m=[0.3,0.2];
-      %con=[-0.2 <= us <= 0.3 ,   ...
-               % xs == mpc.A*xs + mpc.B*us + mpc.B*d_est]; 
-      %obj = us'*us;
-      
-      
-     % con=(mpc.B * d_est == (eye(n) - mpc.A) * xs - mpc.B * us) + (u_M * us <= u_m); %(-0.2 <= us <= 0.3)+
       
       obj = (mpc.C * xs - ref)' * (mpc.C * xs - ref);
       
@@ -173,21 +149,7 @@ classdef MPC_Control_z < MPC_Control
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 
       % You can use the matrices mpc.A, mpc.B, mpc.C and mpc.D
-      
-      %A_bar = [];
-      %B_bar = [];
-      %C_bar = [];
-      %L = [];
-      nx   = size(mpc.A,1);
-      nu   = size(mpc.B,2);
-      %ny   = size(mpc.C,1);
-      %A_bar = [mpc.A  , zeros(nx,1);  zeros(1,nx),   1];
-      %B_bar = [mpc.B;zeros(1,nu)];
-      %C_bar = [mpc.C,ones(ny,1)];
-      
-      %A_bar = [mpc.A, mpc.B; zeros(nu,nx), eye(nu)];
-      %B_bar = [mpc.B;zeros(nu,nu)];
-      %C_bar = [mpc.C, zeros(1,nu)];
+
 
       [n,m] = size(mpc.B); p = m;
       
@@ -198,8 +160,6 @@ classdef MPC_Control_z < MPC_Control
       %L = -place(A_bar',C_bar',[0.45;0.5;0.55])';
       L = -place(A_bar',C_bar',[0.5,0.6,0.7])';
 
-      
-      
       % YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE YOUR CODE HERE 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end

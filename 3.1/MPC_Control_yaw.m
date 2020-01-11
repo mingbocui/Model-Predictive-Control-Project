@@ -59,17 +59,7 @@ classdef MPC_Control_yaw < MPC_Control
           end
       end
       [Ff,ff] = double(Xf);
-      figure;Xf.projection(1:2).plot();title("Terminal invariant set of yaw");hold on;saveas(gcf,"3_1_terminal_yaw/terminal_yaw.jpg");      
-      %sys_new = LTISystem('A',mpc.A,'B',mpc.B);
-      %sys_new.x.penalty = QuadFunction(Q);
-      %sys_new.u.penalty = QuadFunction(R);
-      %Qf = sys_new.LQRPenalty.weight;
-      %Sf = sys_new.LQRSet;
-      %Ff = Sf.A;
-      %ff = Sf.b;
-      
-      %Sf.projection(1:2).plot();
-      % Xf.projection(1:2).plot();
+%       figure;Xf.projection(1:2).plot();title("Terminal invariant set of yaw");hold on;saveas(gcf,"3_1_terminal_yaw/terminal_yaw.jpg");      
       
       con = [];
       obj = 0;

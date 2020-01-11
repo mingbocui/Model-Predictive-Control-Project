@@ -20,7 +20,6 @@ classdef MPC_Control_x < MPC_Control
       us = sdpvar(m, 1);
       
       % SET THE HORIZON HERE
-      %N = ...不确定
       N=10;
       
       
@@ -41,8 +40,8 @@ classdef MPC_Control_x < MPC_Control
       Fu=[1;-1];
       fu=[0.3;0.3];
       
-      Q=eye(n)*1; % 不确定
-      R=eye(m)*1; % 不确定
+      Q=eye(n)*1; 
+      R=eye(m)*1; 
       
       % max invariant set for terminal LQR controller
       [K,Qf,~] = dlqr(mpc.A,mpc.B,Q,R);
@@ -61,18 +60,7 @@ classdef MPC_Control_x < MPC_Control
           end
       end
       [Ff,ff] = double(Xf);
-      
-      %sys_new = LTISystem('A',mpc.A,'B',mpc.B);
-      %sys_new.x.penalty = QuadFunction(Q);
-      %sys_new.u.penalty = QuadFunction(R);
-      %Qf = sys_new.LQRPenalty.weight;
-      %Sf = sys_new.LQRSet;
-      %Ff = Sf.A;
-      %ff = Sf.b;
-      
-      %Sf.projection(1:2).plot();
-      % Xf.projection(1:2).plot();
-      
+
       con = [];
       obj = 0;
       %con = (x(:,2) == sys_x.A*x(:,1) + sys_x.B*u(:,1)) + (M*u(:,1) <= m);
