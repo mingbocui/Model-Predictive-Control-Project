@@ -1,4 +1,4 @@
-function draw = draw(deliverable, tag)
+function draw = draw(tag)
     draw=0;
     Ts = 1/5; 
     quad = Quad(Ts); 

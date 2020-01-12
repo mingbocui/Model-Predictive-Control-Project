@@ -59,7 +59,7 @@ classdef MPC_Control_yaw < MPC_Control
           end
       end
       [Ff,ff] = double(Xf);
-%       figure;Xf.projection(1:2).plot();title("Terminal invariant set of yaw");hold on;saveas(gcf,"3_1_terminal_yaw/terminal_yaw.jpg");      
+      figure;Xf.projection(1:2).plot();title("Terminal invariant set of yaw");hold on;%saveas(gcf,"3_1_terminal_yaw/terminal_yaw.jpg");      
       
       con = [];
       obj = 0;

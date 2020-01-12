@@ -61,9 +61,9 @@ classdef MPC_Control_y < MPC_Control
       end
       [Ff,ff] = double(Xf);
       
-%       figure;Xf.projection(1:2).plot();title("Terminal invariant set for 1st and 2nd dimension of y");hold on;saveas(gcf,"3_1_terminal_y/terminal_y_1_2.jpg");
-%       figure;Xf.projection(2:3).plot();title("Terminal invariant set for 2nd and 3rd dimension of y");hold on;saveas(gcf,"3_1_terminal_y/terminal_y_2_3.jpg");
-%       figure;Xf.projection(3:4).plot();title("Terminal invariant set for 3rd and 4th dimension of y");hold on;saveas(gcf,"3_1_terminal_y/terminal_y_3_4.jpg");
+      figure;Xf.projection(1:2).plot();title("Terminal invariant set for 1st and 2nd dimension of y");hold on;%saveas(gcf,"3_1_terminal_y/terminal_y_1_2.jpg");
+      figure;Xf.projection(2:3).plot();title("Terminal invariant set for 2nd and 3rd dimension of y");hold on;%saveas(gcf,"3_1_terminal_y/terminal_y_2_3.jpg");
+      figure;Xf.projection(3:4).plot();title("Terminal invariant set for 3rd and 4th dimension of y");hold on;%saveas(gcf,"3_1_terminal_y/terminal_y_3_4.jpg");
             
       con = [];
       obj = 0;

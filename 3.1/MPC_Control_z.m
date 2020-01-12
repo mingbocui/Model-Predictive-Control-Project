@@ -73,7 +73,7 @@ classdef MPC_Control_z < MPC_Control
           end
       end
       [Ff,ff] = double(Xf);
-%       figure;Xf.projection(1:2).plot();title("Terminal invariant set of z");hold on;saveas(gcf,"3_1_terminal_z/terminal_z.jpg");
+      figure;Xf.projection(1:2).plot();title("Terminal invariant set of z");hold on;%saveas(gcf,"3_1_terminal_z/terminal_z.jpg");
       
       con = [];
       obj = 0;
