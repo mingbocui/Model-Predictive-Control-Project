@@ -75,4 +75,16 @@ CTRL = ctrl_NMPC(quad);
 sim = quad.sim(CTRL)
 quad.plot(sim)
 
+For plot of deliverable 3.1 and 3.2 we create a specified draw.m function in folder 3.1 and 3.2:
+Get plots for deliverable 3.1 by call the following in the terminal:
+draw("3_1", 'x');
+ draw("3_1", 'y');
+draw("3_1", 'z');
+draw("3_1", "yaw") 
+Get plots for deliverable 3.2 by call the following in the terminal:
+draw("3_2", 'x');
+draw("3_2", 'y');
+draw("3_2", 'z');
+draw("3_2", "yaw")
+
 
